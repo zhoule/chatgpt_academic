@@ -1,40 +1,40 @@
 
 def get_crazy_functionals():
-    from crazy_functions.读文章写摘要 import 读文章写摘要
-    from crazy_functions.生成函数注释 import 批量生成函数注释
-    from crazy_functions.解析项目源代码 import 解析项目本身
-    from crazy_functions.解析项目源代码 import 解析一个Python项目
-    from crazy_functions.解析项目源代码 import 解析一个C项目的头文件
-    from crazy_functions.解析项目源代码 import 解析一个C项目
-    from crazy_functions.高级功能函数模板 import 高阶功能模板函数
+    from crazy_functions.summarizer import generate_summary
+    from crazy_functions.generate_comments import batch_comments_generator
+    from crazy_functions.sourcecode_explaination import explain_project
+    from crazy_functions.sourcecode_explaination import explain_python_project
+    from crazy_functions.sourcecode_explaination import explain_c_header
+    from crazy_functions.sourcecode_explaination import explain_c_project
+    from crazy_functions.advance_function_template import advance_function
 
     return {
         "[实验] 请解析并解构此项目本身": {
-            "Function": 解析项目本身
+            "Function": explain_project
         },
         "[实验] 解析整个py项目（配合input输入框）": {
             "Color": "stop",    # 按钮颜色
-            "Function": 解析一个Python项目
+            "Function": explain_python_project
         },
         "[实验] 解析整个C++项目头文件（配合input输入框）": {
             "Color": "stop",    # 按钮颜色
-            "Function": 解析一个C项目的头文件
+            "Function": explain_c_header
         },
         "[实验] 解析整个C++项目（配合input输入框）": {
             "Color": "stop",    # 按钮颜色
-            "Function": 解析一个C项目
+            "Function": explain_c_project
         },
         "[实验] 读tex论文写摘要（配合input输入框）": {
             "Color": "stop",    # 按钮颜色
-            "Function": 读文章写摘要
+            "Function": generate_summary
         },
         "[实验] 批量生成函数注释（配合input输入框）": {
             "Color": "stop",    # 按钮颜色
-            "Function": 批量生成函数注释
+            "Function": batch_comments_generator
         },
         "[实验] 实验功能函数模板": {
             "Color": "stop",    # 按钮颜色
-            "Function": 高阶功能模板函数
+            "Function": advance_function
         },
     }
 

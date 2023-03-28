@@ -3,7 +3,7 @@ from toolbox import CatchException, report_execption, write_results_to_file, pre
 fast_debug = False
 
 
-def 解析Paper(file_manifest, project_folder, top_p, temperature, chatbot, history, systemPromptTxt):
+def read_paper(file_manifest, project_folder, top_p, temperature, chatbot, history, systemPromptTxt):
     import time, glob, os
     print('begin analysis on:', file_manifest)
     for index, fp in enumerate(file_manifest):
@@ -50,7 +50,7 @@ def 解析Paper(file_manifest, project_folder, top_p, temperature, chatbot, hist
 
 
 @CatchException
-def 读文章写摘要(txt, top_p, temperature, chatbot, history, systemPromptTxt, WEB_PORT):
+def generate_summary(txt, top_p, temperature, chatbot, history, systemPromptTxt, WEB_PORT):
     history = []    # 清空历史，以免输入溢出
     import glob, os
     if os.path.exists(txt):
@@ -67,4 +67,4 @@ def 读文章写摘要(txt, top_p, temperature, chatbot, history, systemPromptTx
         report_execption(chatbot, history, a = f"解析项目: {txt}", b = f"找不到任何.tex文件: {txt}")
         yield chatbot, history, '正常'
         return
-    yield from 解析Paper(file_manifest, project_folder, top_p, temperature, chatbot, history, systemPromptTxt)
+    yield from read_paper(file_manifest, project_folder, top_p, temperature, chatbot, history, systemPromptTxt)

@@ -3,7 +3,7 @@ from toolbox import CatchException, report_execption, write_results_to_file, pre
 fast_debug = False
 
 @CatchException
-def 高阶功能模板函数(txt, top_p, temperature, chatbot, history, systemPromptTxt, WEB_PORT):
+def advance_function(txt, top_p, temperature, chatbot, history, systemPromptTxt, WEB_PORT):
     history = []    # 清空历史，以免输入溢出
     for i in range(5):
         i_say = f'我给出一个数字，你给出该数字的平方。我给出数字：{i}'

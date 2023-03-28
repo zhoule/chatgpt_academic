@@ -2,7 +2,7 @@ from predict import predict_no_ui
 from toolbox import CatchException, report_execption, write_results_to_file, predict_no_ui_but_counting_down
 fast_debug = False
 
-def 解析源代码(file_manifest, project_folder, top_p, temperature, chatbot, history, systemPromptTxt):
+def sourcecode_explain(file_manifest, project_folder, top_p, temperature, chatbot, history, systemPromptTxt):
     import time, glob, os
     print('begin analysis on:', file_manifest)
     for index, fp in enumerate(file_manifest):
@@ -47,7 +47,7 @@ def 解析源代码(file_manifest, project_folder, top_p, temperature, chatbot, 
 
 
 @CatchException
-def 解析项目本身(txt, top_p, temperature, chatbot, history, systemPromptTxt, WEB_PORT):
+def explain_project(txt, top_p, temperature, chatbot, history, systemPromptTxt, WEB_PORT):
     history = []    # 清空历史，以免输入溢出
     import time, glob, os
     file_manifest = [f for f in glob.glob('*.py')]
@@ -89,7 +89,7 @@ def 解析项目本身(txt, top_p, temperature, chatbot, history, systemPromptTx
         yield chatbot, history, '正常'
 
 @CatchException
-def 解析一个Python项目(txt, top_p, temperature, chatbot, history, systemPromptTxt, WEB_PORT):
+def explain_python_project(txt, top_p, temperature, chatbot, history, systemPromptTxt, WEB_PORT):
     history = []    # 清空历史，以免输入溢出
     import glob, os
     if os.path.exists(txt):
@@ -104,11 +104,11 @@ def 解析一个Python项目(txt, top_p, temperature, chatbot, history, systemPr
         report_execption(chatbot, history, a = f"解析项目: {txt}", b = f"找不到任何python文件: {txt}")
         yield chatbot, history, '正常'
         return
-    yield from 解析源代码(file_manifest, project_folder, top_p, temperature, chatbot, history, systemPromptTxt)
+    yield from sourcecode_explain(file_manifest, project_folder, top_p, temperature, chatbot, history, systemPromptTxt)
 
 
 @CatchException
-def 解析一个C项目的头文件(txt, top_p, temperature, chatbot, history, systemPromptTxt, WEB_PORT):
+def explain_c_header(txt, top_p, temperature, chatbot, history, systemPromptTxt, WEB_PORT):
     history = []    # 清空历史，以免输入溢出
     import glob, os
     if os.path.exists(txt):
@@ -125,10 +125,10 @@ def 解析一个C项目的头文件(txt, top_p, temperature, chatbot, history, s
         report_execption(chatbot, history, a = f"解析项目: {txt}", b = f"找不到任何.h头文件: {txt}")
         yield chatbot, history, '正常'
         return
-    yield from 解析源代码(file_manifest, project_folder, top_p, temperature, chatbot, history, systemPromptTxt)
+    yield from sourcecode_explain(file_manifest, project_folder, top_p, temperature, chatbot, history, systemPromptTxt)
 
 @CatchException
-def 解析一个C项目(txt, top_p, temperature, chatbot, history, systemPromptTxt, WEB_PORT):
+def explain_c_project(txt, top_p, temperature, chatbot, history, systemPromptTxt, WEB_PORT):
     history = []    # 清空历史，以免输入溢出
     import glob, os
     if os.path.exists(txt):
@@ -145,5 +145,5 @@ def 解析一个C项目(txt, top_p, temperature, chatbot, history, systemPromptT
         report_execption(chatbot, history, a = f"解析项目: {txt}", b = f"找不到任何.h头文件: {txt}")
         yield chatbot, history, '正常'
         return
-    yield from 解析源代码(file_manifest, project_folder, top_p, temperature, chatbot, history, systemPromptTxt)
+    yield from sourcecode_explain(file_manifest, project_folder, top_p, temperature, chatbot, history, systemPromptTxt)
 

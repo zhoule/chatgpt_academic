@@ -3,7 +3,7 @@ from toolbox import CatchException, report_execption, write_results_to_file, pre
 fast_debug = False
 
 
-def 生成函数注释(file_manifest, project_folder, top_p, temperature, chatbot, history, systemPromptTxt):
+def generate_comments(file_manifest, project_folder, top_p, temperature, chatbot, history, systemPromptTxt):
     import time, glob, os
     print('begin analysis on:', file_manifest)
     for index, fp in enumerate(file_manifest):
@@ -37,7 +37,7 @@ def 生成函数注释(file_manifest, project_folder, top_p, temperature, chatbo
 
 
 @CatchException
-def 批量生成函数注释(txt, top_p, temperature, chatbot, history, systemPromptTxt, WEB_PORT):
+def batch_comments_generator(txt, top_p, temperature, chatbot, history, systemPromptTxt, WEB_PORT):
     history = []    # 清空历史，以免输入溢出
     import glob, os
     if os.path.exists(txt):
@@ -54,4 +54,4 @@ def 批量生成函数注释(txt, top_p, temperature, chatbot, history, systemPr
         report_execption(chatbot, history, a = f"解析项目: {txt}", b = f"找不到任何.tex文件: {txt}")
         yield chatbot, history, '正常'
         return
-    yield from 生成函数注释(file_manifest, project_folder, top_p, temperature, chatbot, history, systemPromptTxt)
+    yield from generate_comments(file_manifest, project_folder, top_p, temperature, chatbot, history, systemPromptTxt)

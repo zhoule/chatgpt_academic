@@ -137,3 +137,5 @@ config_private.py
 gpt_log
 private.md
 private_upload
+
+.idea/
